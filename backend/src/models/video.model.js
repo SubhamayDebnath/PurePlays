@@ -1,66 +1,70 @@
 import mongoose from "mongoose";
 import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 
-const videoSchema = new mongoose.Schema({
+const videoSchema = new mongoose.Schema(
+  {
     videoFile: {
-        url:{
-            type: String,
-            require: [true, "Video File is required"],
-        },
-        public_id: {
-            type: String,
-            require: [true, "Video File is required"],
-        }
+      url: {
+        type: String,
+        require: [true, "Video File is required"],
+      },
+      public_id: {
+        type: String,
+        require: [true, "Video File is required"],
+      },
     },
     thumbnail: {
-        url:{
-            type: String,
-            require: [true, "Video File is required"],
-        },
-        public_id: {
-            type: String,
-            require: [true, "Video File is required"],
-        }
+      url: {
+        type: String,
+        require: [true, "Video File is required"],
+      },
+      public_id: {
+        type: String,
+        require: [true, "Video File is required"],
+      },
     },
     title: {
-        type: String,
-        require: [true, "Title is required"],
-        trim: true,
-        lowercase: true,
-        index: true,
+      type: String,
+      require: [true, "Title is required"],
+      trim: true,
+      lowercase: true,
+      index: true,
     },
     description: {
-        type: String,
-        require: [true, "Description is required"],
-        trim: true,
+      type: String,
+      require: [true, "Description is required"],
+      trim: true,
     },
-    category:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Category"
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
     },
     duration: {
-        type: Number,
-        require: [true, "Duration is required"],
+      type: Number,
+      require: [true, "Duration is required"],
     },
     viewsCount: {
-        type: Number,
-        default: 0
+      type: Number,
+      default: 0,
     },
-    likes:[{
+    likes: [
+      {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        default: []
-    }],
+        default: [],
+      },
+    ],
     isPublished: {
-        type: Boolean,
-        default: true
+      type: Boolean,
+      default: true,
     },
     owner: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-    }
-}, { timestamps: true });
-
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  },
+  { timestamps: true }
+);
 
 const Video = mongoose.model("Video", videoSchema);
 export default Video;

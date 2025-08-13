@@ -1,23 +1,29 @@
-import express from 'express';
-import cors from 'cors';
-import cookieParser from 'cookie-parser';
-import { limit } from './constants.js';
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import { limit } from "./constants.js";
 
 const app = express();
 
-app.use(cors({
+app.use(
+  cors({
     origin: process.env.CORS_ORIGIN,
-    credentials: true
-}));
+    credentials: true,
+  })
+);
 
-app.use(express.json({
-    limit: limit
-}));
+app.use(
+  express.json({
+    limit: limit,
+  })
+);
 
-app.use(express.urlencoded({
+app.use(
+  express.urlencoded({
     extended: true,
-    limit: limit
-}));
+    limit: limit,
+  })
+);
 
 app.use(express.static("public"));
 app.use(cookieParser());
@@ -34,8 +40,8 @@ import commentRoutes from "./routes/comment.routes.js";
 app.use("/api/v1/auth", authenticationRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/video", videoRoutes);
-app.use("/api/v1/user",userRoutes);
-app.use("/api/v1/playlist",playlistRoutes);
-app.use("/api/v1/comment",commentRoutes);
+app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/playlist", playlistRoutes);
+app.use("/api/v1/comment", commentRoutes);
 
 export default app;
