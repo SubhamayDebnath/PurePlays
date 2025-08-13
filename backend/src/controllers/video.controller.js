@@ -26,6 +26,8 @@ const getVideoById = asyncHandler(async (req, res) => {
     if (!video) {
         throw new AppError(404, "Video not found or is private");
     }
+    // increment views if some click or watch the video by id
+    await Video.findByIdAndUpdate(videoId, { $inc: { viewsCount: 1 } });
     return res.status(200).json(new ApiResponse(200, "Video fetched successfully", video));
 });
 
@@ -215,7 +217,23 @@ const deleteVideo = asyncHandler(async (req, res) => {
 // add like on video
 
 const addAndRemoveLikes = asyncHandler(async (req,res) => {
-    
-})
+    const videoId = req.params.id;
+    const userId = req.user._id;
+    if(!videoId || !userId){
+        throw new AppError(404, "Video or user not found");
+    }
+    const video = await Video.findById(videoId);
+    if(!video){
+        throw new AppError(404, "Video not found");
+    }
+    if(video.likes.includes(userId)){
+        video.likes = video.likes.filter((id) => id.toString() !== userId.toString());
+    } else {
+        video.likes.push(userId);
+    }
+    const updatedVideo = await video.save();
+    return res.status(200).json(new ApiResponse(200, "Video likes updated successfully", updatedVideo));
+});
 
-export { getAllVideos, getVideoById,getVideosByUser,getVideoByCategory,uploadVideo, updateVideo, deleteVideo };
+
+export { getAllVideos, getVideoById,getVideosByUser,getVideoByCategory,uploadVideo, updateVideo, deleteVideo, addAndRemoveLikes };
