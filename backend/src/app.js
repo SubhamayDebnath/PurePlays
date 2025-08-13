@@ -28,12 +28,14 @@ import categoryRoutes from "./routes/category.routes.js";
 import videoRoutes from "./routes/video.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import playlistRoutes from "./routes/playlist.routes.js";
+import commentRoutes from "./routes/comment.routes.js";
+
 // routes declaration
 app.use("/api/v1/auth", authenticationRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/video", videoRoutes);
 app.use("/api/v1/user",userRoutes);
-app.use('/api/v1/playlist',playlistRoutes);
-
+app.use("/api/v1/playlist",playlistRoutes);
+app.use("/api/v1/comment",commentRoutes);
 
 export default app;
