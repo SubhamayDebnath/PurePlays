@@ -27,7 +27,7 @@ const playListSchema = new mongoose.Schema(
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: [true, "User is required"],
+      require: [true, "User is required"],
     },
   },
   { timestamps: true }

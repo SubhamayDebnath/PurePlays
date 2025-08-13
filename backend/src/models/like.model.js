@@ -3,17 +3,17 @@ import mongoose from "mongoose";
 const likeSchema = mongoose.Schema(
   {
     video: {
-      types: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Video",
       default: null,
     },
     comment: {
-      types: mongoose.Schema.types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Comment",
       default: null,
     },
     owner: {
-      types: mongoose.Schema.types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       default: null,
     },

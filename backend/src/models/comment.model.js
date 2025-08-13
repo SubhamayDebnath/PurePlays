@@ -10,17 +10,16 @@ const commentSchema = new mongoose.Schema(
     video: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Video",
-      required: [true, "Video is required"],
+      require: [true, "Video is required"],
     },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: [true, "User is required"],
+      require: [true, "User is required"],
     },
     parentComment: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Comment",
-      default: null,
     },
   },
   { timestamps: true }
